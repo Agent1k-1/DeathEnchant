@@ -5,7 +5,7 @@
 # permissions — права доступа. default: op выдаёт право операторам сервера.
 # Для обычной настройки используйте config.yml и enchant.yml.
 name: DeathEnchants
-version: 1.0.0
+version: 1.0.1
 main: com.agent1k.deathenchants.DeathEnchants
 api-version: '1.20'
 author: Agent1k

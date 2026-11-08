@@ -121,7 +121,7 @@ public final class Interfaces implements Listener {
             vanilla = first != null && !first.getType().isAir() ? first : second;
         }
         if (vanilla == null) return;
-        ItemStack result = plugin.enchants.clear(vanilla);
+        ItemStack result = plugin.enchants.clear(vanilla, first, second);
         for (Enchantment enchantment : new HashSet<>(result.getEnchantments().keySet())) if (!enchantment.isCursed()) result.removeEnchantment(enchantment);
         if (result.getItemMeta() instanceof org.bukkit.inventory.meta.EnchantmentStorageMeta meta) {
             for (Enchantment enchantment : new HashSet<>(meta.getStoredEnchants().keySet())) if (!enchantment.isCursed()) meta.removeStoredEnchant(enchantment);

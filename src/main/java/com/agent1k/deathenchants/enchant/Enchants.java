@@ -74,12 +74,13 @@ public final class Enchants {
         meta.setLore(lore.isEmpty() ? null : lore);
         item.setItemMeta(meta);
     }
-    public ItemStack clear(ItemStack source) {
+    public ItemStack clear(ItemStack source, ItemStack... inputs) {
         ItemStack item = source.clone();
         ItemMeta meta = item.getItemMeta();
         if (meta.hasLore()) {
             var lore = new ArrayList<>(meta.getLore());
             removeLore(meta, lore);
+            for (ItemStack input : inputs) if (input != null && input.hasItemMeta()) removeLore(input.getItemMeta(), lore);
             meta.setLore(lore.isEmpty() ? null : lore);
         }
         for (NamespacedKey key : new HashSet<>(meta.getPersistentDataContainer().getKeys())) if (key.getNamespace().equals(plugin.getName().toLowerCase(Locale.ROOT))) meta.getPersistentDataContainer().remove(key);

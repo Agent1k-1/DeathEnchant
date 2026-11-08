@@ -5,6 +5,7 @@ import com.agent1k.deathenchants.action.Actions;
 import com.agent1k.deathenchants.command.EnchantCommand;
 import com.agent1k.deathenchants.listener.Effects;
 import com.agent1k.deathenchants.listener.Interfaces;
+import com.agent1k.deathenchants.listener.ItemRefresh;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
@@ -21,6 +22,9 @@ public final class DeathEnchants extends JavaPlugin {
         getCommand("deathenchants").setTabCompleter(command);
         getServer().getPluginManager().registerEvents(new Effects(this), this);
         getServer().getPluginManager().registerEvents(new Interfaces(this), this);
+        ItemRefresh refresh = new ItemRefresh(this);
+        getServer().getPluginManager().registerEvents(refresh, this);
+        getServer().getOnlinePlayers().forEach(refresh::refresh);
     }
     public void load() {
         reloadConfig();
