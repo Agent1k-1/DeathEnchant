@@ -1,3 +1,9 @@
+# Служебное описание плагина для Paper. Изменения требуют перезапуска сервера.
+# name — имя плагина; version — версия; main — полный путь к главному Java-классу.
+# main и api-version должны соответствовать исходному коду и целевому API.
+# author — автор. commands — зарегистрированные команды; aliases — сокращения.
+# permissions — права доступа. default: op выдаёт право операторам сервера.
+# Для обычной настройки используйте config.yml и enchant.yml.
 name: DeathEnchants
 version: 1.0.0
 main: com.agent1k.deathenchants.DeathEnchants
