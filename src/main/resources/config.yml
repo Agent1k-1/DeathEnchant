@@ -1,0 +1,17 @@
+table:
+  chance: 30.0
+  levels: [8, 16, 24]
+loot:
+  chance: 12.0
+  tables: []
+vanilla-levels:
+  efficiency: 10
+  unbreaking: 5
+  sharpness: 6
+limits:
+  tree-blocks: 128
+  vein-blocks: 9
+pinger:
+  remaining-percent: 10.0
+lava:
+  duration-ticks: 100

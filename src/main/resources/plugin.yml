@@ -1,0 +1,12 @@
+name: DeathEnchants
+version: 1.0.0
+main: com.agent1k.deathenchants.DeathEnchants
+api-version: '1.20'
+author: Agent1k
+commands:
+  deathenchants:
+    aliases: [deathe]
+    description: Управление чарами
+permissions:
+  deathenchants.admin:
+    default: op

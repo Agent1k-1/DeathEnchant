@@ -1,0 +1,14 @@
+help:
+  - '[message] &d/deathe give <ник> <чар> [уровень]'
+  - '[message] &d/deathe list | reload'
+permission:
+  - '[message] &cНедостаточно прав.'
+error:
+  - '[message] &cНеверные аргументы, уровень или игрок не в сети.'
+given:
+  - '[message] &aКнига выдана игроку {player}.'
+reloaded:
+  - '[message] &aКонфигурация перезагружена.'
+pinger:
+  - '[title] &cПредмет скоро сломается!|&eОсталось {durability} прочности'
+  - '[sound] BLOCK_ANVIL_LAND 1 1'

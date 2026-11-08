@@ -1,0 +1,90 @@
+drill:
+  enabled: true
+  name: "&dБур"
+  max-level: 2
+  weight: 10
+  target: TOOLS_NO_HOE
+  values: [80, 100]
+  description:
+    - "&7Бур: особое зачарование"
+pinger:
+  enabled: true
+  name: "&dПингер"
+  max-level: 1
+  weight: 10
+  target: ALL
+  values: [100]
+  description:
+    - "&7Пингер: особое зачарование"
+unbreakable:
+  enabled: true
+  name: "&dНерушимость"
+  max-level: 1
+  weight: 10
+  target: TOOLS
+  values: [100]
+  description:
+    - "&7Нерушимость: особое зачарование"
+experienced:
+  enabled: true
+  name: "&dОпытный"
+  max-level: 5
+  weight: 10
+  target: ALL
+  values: [10, 15, 25, 35, 50]
+  description:
+    - "&7Опытный: особое зачарование"
+vampirism:
+  enabled: true
+  name: "&dВампиризм"
+  max-level: 1
+  weight: 10
+  target: WEAPONS
+  values: [10]
+  description:
+    - "&7Вампиризм: особое зачарование"
+smelting:
+  enabled: true
+  name: "&dАвтоплавка"
+  max-level: 1
+  weight: 10
+  target: TOOLS
+  values: [100]
+  description:
+    - "&7Автоплавка: особое зачарование"
+telepathy:
+  enabled: true
+  name: "&dТелепатия"
+  max-level: 1
+  weight: 10
+  target: TOOLS
+  values: [100]
+  description:
+    - "&7Телепатия: особое зачарование"
+lavawalker:
+  enabled: true
+  name: "&dЛаваход"
+  max-level: 1
+  weight: 10
+  target: BOOTS
+  values: [100]
+  description:
+    - "&7Лаваход: особое зачарование"
+sowing:
+  enabled: true
+  name: "&dПосев"
+  max-level: 1
+  weight: 10
+  target: HOES
+  values: [100]
+  description:
+    - "&7Посев: особое зачарование"
+lumberjack:
+  enabled: true
+  name: "&dДровосек"
+  max-level: 1
+  weight: 10
+  target: AXES
+  values: [100]
+  description:
+    - "&7Дровосек: особое зачарование"
