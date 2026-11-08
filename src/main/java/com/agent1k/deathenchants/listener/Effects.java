@@ -53,7 +53,8 @@ public final class Effects implements Listener {
         if (plugin.enchants.level(tool, "sowing") > 0 && origin.getBlockData() instanceof Ageable age && age.getAge() == age.getMaximumAge()) {
             Material seed = switch (origin.getType()) { case WHEAT -> Material.WHEAT_SEEDS; case CARROTS -> Material.CARROT; case POTATOES -> Material.POTATO; case BEETROOTS -> Material.BEETROOT_SEEDS; case NETHER_WART -> Material.NETHER_WART; default -> null; };
             if (seed != null && p.getInventory().contains(seed)) {
-                var data = age.clone(); data.setAge(0);
+                Ageable data = (Ageable) age.clone();
+                data.setAge(0);
                 Bukkit.getScheduler().runTask(plugin, () -> { if (origin.getType().isAir() && p.getInventory().contains(seed)) { p.getInventory().removeItem(new ItemStack(seed)); origin.setBlockData(data); } });
             }
         }
