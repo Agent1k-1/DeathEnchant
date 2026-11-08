@@ -72,9 +72,11 @@ public final class Interfaces implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void enchant(EnchantItemEvent e) {
         for (var entry : e.getEnchantsToAdd().entrySet()) {
-            int max = plugin.getConfig().getInt("vanilla-levels." + entry.getKey().getKey().getKey(), entry.getKey().getMaxLevel());
+            String path = "vanilla-levels." + entry.getKey().getKey().getKey();
+            if (!plugin.getConfig().contains(path)) continue;
+            int max = plugin.getConfig().getInt(path, entry.getKey().getMaxLevel());
             int level = Math.max(1, Math.min(255, max));
-            entry.setValue(Math.min(level, Math.max(entry.getValue(), (int) Math.ceil(level * e.getExpLevelCost() / 30.0))));
+            entry.setValue(level);
         }
         if (!plugin.enchants.roll(plugin.getConfig().getDouble("table.chance",30))) return;
         var d = plugin.enchants.random(e.getItem().getType());
