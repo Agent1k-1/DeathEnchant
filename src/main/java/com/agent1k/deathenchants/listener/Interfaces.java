@@ -112,13 +112,16 @@ public final class Interfaces implements Listener {
     }
     @EventHandler
     public void grind(PrepareGrindstoneEvent e) {
-        ItemStack input = e.getInventory().getItem(0);
-        if (input == null) input = e.getInventory().getItem(1);
-        if (input == null) return;
-        boolean custom = false;
-        for (var d : plugin.enchants.all()) if (plugin.enchants.level(input, d.id()) > 0) custom = true;
-        if (!custom) return;
-        ItemStack result = plugin.enchants.clear(e.getResult() == null ? input : e.getResult());
+        ItemStack first = e.getInventory().getItem(0);
+        ItemStack second = e.getInventory().getItem(1);
+        if (!plugin.enchants.hasCustom(first) && !plugin.enchants.hasCustom(second)) return;
+        ItemStack vanilla = e.getResult();
+        if (vanilla == null || vanilla.getType().isAir()) {
+            if (first != null && !first.getType().isAir() && second != null && !second.getType().isAir()) return;
+            vanilla = first != null && !first.getType().isAir() ? first : second;
+        }
+        if (vanilla == null) return;
+        ItemStack result = plugin.enchants.clear(vanilla);
         for (Enchantment enchantment : new HashSet<>(result.getEnchantments().keySet())) if (!enchantment.isCursed()) result.removeEnchantment(enchantment);
         if (result.getItemMeta() instanceof org.bukkit.inventory.meta.EnchantmentStorageMeta meta) {
             for (Enchantment enchantment : new HashSet<>(meta.getStoredEnchants().keySet())) if (!enchantment.isCursed()) meta.removeStoredEnchant(enchantment);
