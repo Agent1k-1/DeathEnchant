@@ -71,13 +71,6 @@ public final class Interfaces implements Listener {
     public void drag(InventoryDragEvent e) { if (e.getView().getTopInventory().getHolder() instanceof Menu) e.setCancelled(true); }
     @EventHandler(ignoreCancelled = true)
     public void enchant(EnchantItemEvent e) {
-        for (var entry : e.getEnchantsToAdd().entrySet()) {
-            String path = "vanilla-levels." + entry.getKey().getKey().getKey();
-            if (!plugin.getConfig().contains(path)) continue;
-            int max = plugin.getConfig().getInt(path, entry.getKey().getMaxLevel());
-            int level = Math.max(1, Math.min(255, max));
-            entry.setValue(level);
-        }
         if (!plugin.enchants.roll(plugin.getConfig().getDouble("table.chance",30))) return;
         var d = plugin.enchants.random(e.getItem().getType());
         if (d != null) plugin.enchants.apply(e.getItem(), d.id(), ThreadLocalRandom.current().nextInt(d.max()) + 1);
@@ -89,26 +82,6 @@ public final class Interfaces implements Listener {
         if (!plugin.enchants.roll(plugin.getConfig().getDouble("loot.chance",12))) return;
         var d = plugin.enchants.random(Material.BOOK);
         if (d != null) e.getLoot().add(plugin.enchants.book(d.id(), ThreadLocalRandom.current().nextInt(d.max()) + 1));
-    }
-    @EventHandler
-    public void anvil(PrepareAnvilEvent e) {
-        ItemStack left = e.getInventory().getItem(0), right = e.getInventory().getItem(1);
-        if (left == null || right == null) return;
-        ItemStack result = e.getResult() == null ? left.clone() : e.getResult().clone();
-        boolean changed = false;
-        for (var d : plugin.enchants.all()) {
-            int incoming = plugin.enchants.level(right, d.id());
-            if (incoming == 0 || !(result.getType() == Material.ENCHANTED_BOOK || d.target().accepts(result.getType()))) continue;
-            if (right.getType() != Material.ENCHANTED_BOOK && right.getType() != left.getType()) continue;
-            int old = plugin.enchants.level(left, d.id());
-            plugin.enchants.apply(result, d.id(), Math.min(d.max(), old == incoming ? old + 1 : Math.max(old, incoming)));
-            changed = true;
-        }
-        if (changed) {
-            String name = e.getInventory().getRenameText();
-            if (name != null && !name.isBlank()) { var meta = result.getItemMeta(); meta.setDisplayName(name); result.setItemMeta(meta); }
-            result.setAmount(1); e.setResult(result); e.getInventory().setRepairCost(Math.max(1, e.getInventory().getRepairCost()));
-        }
     }
     @EventHandler
     public void grind(PrepareGrindstoneEvent e) {

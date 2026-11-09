@@ -1,6 +1,7 @@
 package com.agent1k.deathenchants;
 
 import com.agent1k.deathenchants.enchant.Enchants;
+import com.agent1k.deathenchants.anvil.AnvilListener;
 import com.agent1k.deathenchants.action.Actions;
 import com.agent1k.deathenchants.command.EnchantCommand;
 import com.agent1k.deathenchants.listener.Effects;
@@ -22,6 +23,7 @@ public final class DeathEnchants extends JavaPlugin {
         getCommand("deathenchants").setTabCompleter(command);
         getServer().getPluginManager().registerEvents(new Effects(this), this);
         getServer().getPluginManager().registerEvents(new Interfaces(this), this);
+        getServer().getPluginManager().registerEvents(new AnvilListener(this), this);
         ItemRefresh refresh = new ItemRefresh(this);
         getServer().getPluginManager().registerEvents(refresh, this);
         getServer().getOnlinePlayers().forEach(refresh::refresh);
