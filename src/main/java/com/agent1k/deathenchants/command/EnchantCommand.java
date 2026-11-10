@@ -25,7 +25,26 @@ public final class EnchantCommand implements CommandExecutor, TabCompleter {
         return true;
     }
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        List<String> choices = args.length == 1 ? List.of("give", "reload", "list") : args.length == 2 && args[0].equalsIgnoreCase("give") ? Bukkit.getOnlinePlayers().stream().map(p -> p.getName()).toList() : args.length == 3 ? plugin.enchants.all().stream().map(d -> d.id()).toList() : List.of();
-        return choices.stream().filter(s -> s.toLowerCase(Locale.ROOT).startsWith(args[args.length - 1].toLowerCase(Locale.ROOT))).toList();
+        if (args.length == 0) return List.of();
+        boolean admin = sender.hasPermission("deathenchants.admin");
+        List<String> choices;
+        if (args.length == 1) {
+            choices = admin ? List.of("give", "reload", "list") : List.of("list");
+        } else if (!admin || !args[0].equalsIgnoreCase("give")) {
+            return List.of();
+        } else if (args.length == 2) {
+            choices = Bukkit.getOnlinePlayers().stream().map(p -> p.getName()).toList();
+        } else if (args.length == 3) {
+            choices = plugin.enchants.all().stream().map(d -> d.id()).toList();
+        } else if (args.length == 4) {
+            var enchantment = plugin.enchants.get(args[2].toLowerCase(Locale.ROOT));
+            if (enchantment == null) return List.of();
+            choices = java.util.stream.IntStream.rangeClosed(1, enchantment.max())
+                    .mapToObj(Integer::toString).toList();
+        } else {
+            return List.of();
+        }
+        String prefix = args[args.length - 1].toLowerCase(Locale.ROOT);
+        return choices.stream().filter(value -> value.toLowerCase(Locale.ROOT).startsWith(prefix)).toList();
     }
 }
