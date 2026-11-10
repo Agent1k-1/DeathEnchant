@@ -5,6 +5,7 @@ import com.agent1k.deathenchants.core.looader.EnchantLoader;
 import com.agent1k.deathenchants.anvil.AnvilListener;
 import com.agent1k.deathenchants.action.Actions;
 import com.agent1k.deathenchants.command.EnchantCommand;
+import com.agent1k.deathenchants.command.tab.EnchantTabCompleter;
 import com.agent1k.deathenchants.listener.Effects;
 import com.agent1k.deathenchants.listener.Interfaces;
 import com.agent1k.deathenchants.listener.ItemRefresh;
@@ -21,7 +22,7 @@ public final class DeathEnchants extends JavaPlugin {
         load();
         EnchantCommand command = new EnchantCommand(this);
         getCommand("deathenchants").setExecutor(command);
-        getCommand("deathenchants").setTabCompleter(command);
+        getCommand("deathenchants").setTabCompleter(new EnchantTabCompleter(command.subcommands()));
         getServer().getPluginManager().registerEvents(new Effects(this), this);
         getServer().getPluginManager().registerEvents(new Interfaces(this), this);
         getServer().getPluginManager().registerEvents(new AnvilListener(this), this);
