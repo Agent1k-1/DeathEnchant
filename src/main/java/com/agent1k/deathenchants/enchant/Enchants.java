@@ -103,8 +103,6 @@ public final class Enchants {
             if (level == null || level <= 0) continue;
             String id = stored.getKey();
             owned.add(ChatColor.stripColor(HexUtils.color(config.getString(id + ".name", id))) + " " + roman(level));
-            owned.add(ChatColor.stripColor(HexUtils.color(config.getString(id + ".name", id))) + ": особое зачарование");
-            for (String line : config.getStringList(id + ".description")) owned.add(ChatColor.stripColor(HexUtils.color(line.replace("{level}", String.valueOf(level)))));
         }
         lore.removeIf(line -> line.startsWith("§0§0§r") || owned.contains(ChatColor.stripColor(line)));
     }
