@@ -3,7 +3,7 @@ package com.agent1k.deathenchants;
 import com.agent1k.deathenchants.core.enchnat.Enchants;
 import com.agent1k.deathenchants.core.looader.EnchantLoader;
 import com.agent1k.deathenchants.anvil.AnvilListener;
-import com.agent1k.deathenchants.action.Actions;
+import com.agent1k.deathenchants.action.ActionExecutor;
 import com.agent1k.deathenchants.command.EnchantCommand;
 import com.agent1k.deathenchants.command.tab.EnchantTabCompleter;
 import com.agent1k.deathenchants.listener.Effects;
@@ -15,7 +15,7 @@ import java.io.File;
 
 public final class DeathEnchants extends JavaPlugin {
     public Enchants enchants;
-    public Actions actions;
+    public ActionExecutor actions;
     public void onEnable() {
         saveDefaultConfig();
         if (!new File(getDataFolder(), "messages.yml").exists()) saveResource("messages.yml", false);
@@ -33,6 +33,6 @@ public final class DeathEnchants extends JavaPlugin {
     public void load() {
         reloadConfig();
         enchants = new EnchantLoader(this).load();
-        actions = new Actions(YamlConfiguration.loadConfiguration(new File(getDataFolder(), "messages.yml")));
+        actions = new ActionExecutor(YamlConfiguration.loadConfiguration(new File(getDataFolder(), "messages.yml")));
     }
 }
