@@ -6,7 +6,6 @@
 # Для обычной настройки используйте config.yml и enchant.yml.
 name: DeathEnchants
 version: 1.0.4
-main: com.agent1k.DeathEnchants
 api-version: '1.20'
 author: Agent1k
 commands:
