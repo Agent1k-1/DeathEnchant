@@ -1,7 +1,7 @@
 package com.agent1k.deathenchants.listener;
 
 import com.agent1k.deathenchants.DeathEnchants;
-import com.agent1k.deathenchants.enchant.Enchants;
+import com.agent1k.deathenchants.core.enchnat.Enchants;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;

@@ -1,6 +1,6 @@
 package com.agent1k.deathenchants;
 
-import com.agent1k.deathenchants.enchant.Enchants;
+import com.agent1k.deathenchants.core.enchnat.Enchants;
 import com.agent1k.deathenchants.anvil.AnvilListener;
 import com.agent1k.deathenchants.action.Actions;
 import com.agent1k.deathenchants.command.EnchantCommand;

@@ -1,4 +1,4 @@
-package com.agent1k.deathenchants.enchant;
+package com.agent1k.deathenchants.core.inst;
 
 import org.bukkit.Material;
 public enum Target {

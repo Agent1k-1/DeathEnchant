@@ -1,4 +1,6 @@
-package com.agent1k.deathenchants.enchant;
+package com.agent1k.deathenchants.core.enchnat;
+
+import com.agent1k.deathenchants.core.inst.Target;
 
 import com.agent1k.deathenchants.DeathEnchants;
 import com.agent1k.deathenchants.utils.HexUtils;

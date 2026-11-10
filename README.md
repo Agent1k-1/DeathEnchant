@@ -46,3 +46,7 @@
 ## Изменение в 1.0.4
 
 Описания чар удалены и с книг, и со снаряжения. Поля `description` больше нет в стандартном `enchant.yml`. Чтение старых полей description и распознавание старого описания по его тексту полностью удалены из кода. При обновлении предметов сохраняются название и уровень чар.
+
+## Структура кода
+
+`core/enchnat` содержит Enchants и отдельные классы десяти эффектов: DrillEnchant, PingerEnchant, UnbreakableEnchant, ExperiencedEnchant, VampirismEnchant, SmeltingEnchant, TelepathyEnchant, LavawalkerEnchant, SowingEnchant, LumberjackEnchant. `core/inst/Target` определяет допустимые предметы. `listener/Effects` связывает события с эффектами, сохраняет порядок автоплавки и телепатии и защиту от рекурсивного разрушения блоков. Написание `enchnat` сохранено согласно запросу.
