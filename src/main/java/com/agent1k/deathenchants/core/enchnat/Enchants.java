@@ -3,9 +3,7 @@ package com.agent1k.deathenchants.core.enchnat;
 import com.agent1k.deathenchants.core.inst.Target;
 
 import com.agent1k.deathenchants.DeathEnchants;
-import com.agent1k.deathenchants.utils.HexUtils;
 import org.bukkit.*;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 import org.bukkit.persistence.PersistentDataType;
@@ -15,16 +13,13 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class Enchants {
     public record Definition(String id, String name, int max, int weight, double chance, Target target, List<Double> values) { }
     private final DeathEnchants plugin;
-    private final FileConfiguration config;
-    private final Map<String, Definition> definitions = new LinkedHashMap<>();
-    public Enchants(DeathEnchants plugin, FileConfiguration config) {
+    private final Map<String, Definition> definitions;
+    private final Map<String, String> names;
+
+    public Enchants(DeathEnchants plugin, Map<String, Definition> definitions, Map<String, String> names) {
         this.plugin = plugin;
-        this.config = config;
-        for (String id : config.getKeys(false)) {
-            if (!config.getBoolean(id + ".enabled", true)) continue;
-            try { definitions.put(id, new Definition(id, ChatColor.GRAY + ChatColor.stripColor(HexUtils.color(config.getString(id + ".name", id))), Math.max(1, config.getInt(id + ".max-level", 1)), Math.max(0, config.getInt(id + ".weight", 10)), Math.max(0, Math.min(100, config.getDouble(id + ".chance", 100))), id.equals("pinger") ? Target.TOOLS : Target.valueOf(config.getString(id + ".target", "ALL")), config.getDoubleList(id + ".values"))); }
-            catch (IllegalArgumentException error) { plugin.getLogger().warning("Invalid enchant: " + id); }
-        }
+        this.definitions = new LinkedHashMap<>(definitions);
+        this.names = new LinkedHashMap<>(names);
     }
     public Collection<Definition> all() { return definitions.values(); }
     public Definition get(String id) { return definitions.get(id); }
@@ -104,7 +99,7 @@ public final class Enchants {
             Integer level = meta.getPersistentDataContainer().get(stored, PersistentDataType.INTEGER);
             if (level == null || level <= 0) continue;
             String id = stored.getKey();
-            owned.add(ChatColor.stripColor(HexUtils.color(config.getString(id + ".name", id))) + " " + roman(level));
+            owned.add(names.getOrDefault(id, id) + " " + roman(level));
         }
         lore.removeIf(line -> line.startsWith("§0§0§r") || owned.contains(ChatColor.stripColor(line)));
     }

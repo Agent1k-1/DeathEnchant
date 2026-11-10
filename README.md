@@ -50,3 +50,5 @@
 ## Структура кода
 
 `core/enchnat` содержит Enchants и отдельные классы десяти эффектов: DrillEnchant, PingerEnchant, UnbreakableEnchant, ExperiencedEnchant, VampirismEnchant, SmeltingEnchant, TelepathyEnchant, LavawalkerEnchant, SowingEnchant, LumberjackEnchant. `core/inst/Target` определяет допустимые предметы. `listener/Effects` связывает события с эффектами, сохраняет порядок автоплавки и телепатии и защиту от рекурсивного разрушения блоков. Написание `enchnat` сохранено согласно запросу.
+
+`core/looader/EnchantLoader` создаёт отсутствующий `enchant.yml`, загружает определения чар и передаёт их в `Enchants`. Загрузчик вызывается при старте и `/deathe reload`; `Enchants` больше не читает YAML. Имена отключённых чар сохраняются отдельно для очистки их названий с предметов.
