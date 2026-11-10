@@ -1,4 +1,4 @@
-package com.agent1k.deathenchants.listener;
+package com.agent1k.deathenchants.prts;
 
 import com.agent1k.deathenchants.DeathEnchants;
 import org.bukkit.Bukkit;

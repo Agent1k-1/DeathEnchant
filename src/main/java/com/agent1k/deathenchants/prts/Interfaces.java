@@ -1,8 +1,7 @@
-package com.agent1k.parts;
+package com.agent1k.deathenchants.prts;
 
-import com.agent1k.DeathEnchants;
-import com.agent1k.core.enchnat.Enchants;
-import com.agent1k.menu.AbstractMenu;
+import com.agent1k.deathenchants.DeathEnchants;
+import com.agent1k.deathenchants.core.enchnat.Enchants;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -18,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class Interfaces implements Listener {
     private final DeathEnchants plugin;
     public Interfaces(DeathEnchants plugin) { this.plugin = plugin; }
-    private static final class Menu extends AbstractMenu {
+    private static final class Menu extends com.agent1k.deathenchants.menu.AbstractMenu {
         final ItemStack original;
         final int slot;
         final Location table;

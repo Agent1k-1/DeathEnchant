@@ -1,7 +1,6 @@
-package com.agent1k.parts;
+package com.agent1k.deathenchants.prts;
 
-import com.agent1k.DeathEnchants;
-import com.agent1k.core.enchnat.*;
+import com.agent1k.deathenchants.DeathEnchants;
 import com.agent1k.deathenchants.core.enchnat.*;
 import org.bukkit.*;
 import org.bukkit.block.Block;
