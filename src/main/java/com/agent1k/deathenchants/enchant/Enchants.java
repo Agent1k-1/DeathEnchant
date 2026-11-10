@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Enchants {
-    public record Definition(String id, String name, int max, int weight, double chance, Target target, List<Double> values, List<String> description) { }
+    public record Definition(String id, String name, int max, int weight, double chance, Target target, List<Double> values) { }
     private final DeathEnchants plugin;
     private final FileConfiguration config;
     private final Map<String, Definition> definitions = new LinkedHashMap<>();
@@ -20,7 +20,7 @@ public final class Enchants {
         this.config = config;
         for (String id : config.getKeys(false)) {
             if (!config.getBoolean(id + ".enabled", true)) continue;
-            try { definitions.put(id, new Definition(id, ChatColor.GRAY + ChatColor.stripColor(HexUtils.color(config.getString(id + ".name", id))), Math.max(1, config.getInt(id + ".max-level", 1)), Math.max(0, config.getInt(id + ".weight", 10)), Math.max(0, Math.min(100, config.getDouble(id + ".chance", 100))), id.equals("pinger") ? Target.TOOLS : Target.valueOf(config.getString(id + ".target", "ALL")), config.getDoubleList(id + ".values"), config.getStringList(id + ".description"))); }
+            try { definitions.put(id, new Definition(id, ChatColor.GRAY + ChatColor.stripColor(HexUtils.color(config.getString(id + ".name", id))), Math.max(1, config.getInt(id + ".max-level", 1)), Math.max(0, config.getInt(id + ".weight", 10)), Math.max(0, Math.min(100, config.getDouble(id + ".chance", 100))), id.equals("pinger") ? Target.TOOLS : Target.valueOf(config.getString(id + ".target", "ALL")), config.getDoubleList(id + ".values"))); }
             catch (IllegalArgumentException error) { plugin.getLogger().warning("Invalid enchant: " + id); }
         }
     }
@@ -65,9 +65,6 @@ public final class Enchants {
             int level = level(item, d.id());
             if (level == 0) continue;
             generated.add(marker + d.name() + " " + roman(level));
-            if (item.getType() == Material.ENCHANTED_BOOK || item.getType() == Material.BOOK) {
-                for (String line : d.description()) generated.add(marker + HexUtils.color(line.replace("{level}", String.valueOf(level))));
-            }
         }
         lore.addAll(generated);
         meta.getPersistentDataContainer().set(key("generated_lore"), PersistentDataType.STRING, String.join("\n", generated));
@@ -106,6 +103,7 @@ public final class Enchants {
             if (level == null || level <= 0) continue;
             String id = stored.getKey();
             owned.add(ChatColor.stripColor(HexUtils.color(config.getString(id + ".name", id))) + " " + roman(level));
+            owned.add(ChatColor.stripColor(HexUtils.color(config.getString(id + ".name", id))) + ": особое зачарование");
             for (String line : config.getStringList(id + ".description")) owned.add(ChatColor.stripColor(HexUtils.color(line.replace("{level}", String.valueOf(level)))));
         }
         lore.removeIf(line -> line.startsWith("§0§0§r") || owned.contains(ChatColor.stripColor(line)));
